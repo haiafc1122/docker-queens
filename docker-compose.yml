@@ -1,0 +1,38 @@
+version: "2"
+
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./queens/public:/var/www/queens/public
+    ports:
+      - 80:80
+    links:
+      - phpfpm
+    depends_on:
+      - phpfpm
+  phpfpm:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./queens:/var/www/queens
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=queens
+      - DB_USERNAME=root
+      - DB_PASSWORD=pass
+  mysql:
+    image: mysql:5.7
+    volumes:
+            - "./.data/db:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_DATABASE=queens
+    ports:
+      - 42333:3306
