@@ -13,5 +13,5 @@ npm-debug.log
 yarn-error.log
 .env
 .phpunit.result.cache
-.data
+.data/*
 /queens/.DS_Store

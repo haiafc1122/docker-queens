@@ -18,63 +18,41 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <!-- custom -->
+    <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/dest/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dest/vendors/colorbox/example3/colorbox.css') }}">
+    <link rel="stylesheet" title="style" href="{{ asset('assets/dest/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dest/css/animate.css') }}">
+    <link rel="stylesheet" title="style" href="{{ asset('assets/dest/css/huong-style.css') }}">
+
 </head>
+    
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        @include('layouts.header')
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+        @yield('content')
 
-                    </ul>
+        @include('layouts.bottom')
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+    <!-- include js files -->
+    <script src="{{ asset('assets/dest/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/dest/vendors/jqueryui/jquery-ui-1.10.4.custom.min.js') }}"></script>
+    <script src="{{ asset('http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/dest/vendors/bxslider/jquery.bxslider.min.js') }}"></script>
+    <script src="{{ asset('assets/dest/vendors/colorbox/jquery.colorbox-min.js') }}"></script>
+    <script src="{{ asset('assets/dest/vendors/animo/Animo.js') }}"></script>
+    <script src="{{ asset('assets/dest/vendors/dug/dug.js') }}"></script>
+    <script src="{{ asset('assets/dest/js/scripts.min.js') }}"></script>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+    @yield('bottom_js')
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
 </body>
+
+
 </html>
